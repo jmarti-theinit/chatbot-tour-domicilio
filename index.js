@@ -1,5 +1,6 @@
-// See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
-// for Dialogflow fulfillment library docs, samples, and to report issues
+import { listString } from './lib/strings';
+import { FOODS } from './data/db';
+
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
@@ -11,13 +12,25 @@ exports.aDomicilio = functions.https.onRequest((request, response) => {
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   const listRestaurantes = (agent) => {
-    agent.add(`Estos son los restaurantes que tengo de tipo ${agent.parameters.tipoComida}`);
-    agent.add('Restaurante Paco');
-    agent.add('Bar Juan');
-    agent.add('Marisquería Luis');
+    agent.add(`Estos son los restaurantes que tengo de tipo ${agent.parameters.tipoComida}: `);
+    agent.add(listString(RESTAURANTS[agent.parameters.tipoComida]));
+  };
+
+  const listMenu = (agent) => {
+    agent.setContext({ name: 'comprar', lifespan: 3, parameters: { lugar: agent.parameters.lugar }});
+    agent.add(`Esto es lo que puedes comprar en el lugar ${agent.parameters.lugar}: `);
+    agent.add(listString(FOODS[agent.parameters.lugar]));
+
+  };
+
+  const escogerComida = (agent) => {
+    agent.add(`Perfecto. Vamos a comprar ${agent.parameters.comida} del lugar ${agent.parameters.lugar}`)
+    agent.add('¡Gracias!');
   };
 
   let intentMap = new Map();
   intentMap.set('listar-restaurantes-por-tipo-comida', listRestaurantes);
+  intentMap.set('listar-menu', listMenu);
+  intentMap.set('escoger-comida', escogerComida);
   agent.handleRequest(intentMap);
 });
