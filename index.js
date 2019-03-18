@@ -1,5 +1,5 @@
 const { listString, baseChars } = require('./lib/strings');
-const validRestaurant = require('./lib/validator');
+const validRestaurant = require('./lib/valid-restaurant');
 const { FOODS, RESTAURANTS } = require('./data/db');
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
