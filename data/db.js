@@ -1,6 +1,7 @@
 const RESTAURANTS = {
-  'AMERICANA': [ 'Restaurante Juan', 'Restaurante Pepe' ],
-  'PIZZERIA': [ 'Pizzeria Lucio', 'Pizzería Donatello'],
+  'americana': [ 'Restaurante Juan', 'Restaurante Pepe' ],
+  'pizzeria': [ 'Pizzeria Lucio', 'Pizzería Donatello'],
+  'hindu': [ 'Restaurante Gandhi' ]
 };
 
 const FOODS = {
@@ -8,6 +9,7 @@ const FOODS = {
   'Restaurante Pepe': [ 'Hamburguesa', 'Costillas de cerdo'],
   'Pizzeria Lucio': [ 'Pizza margarita', 'Pizza Especialidad Lucio'],
   'Pizzeria Donatello': [ 'Pizza margarita', 'Pizza Especialidad Donatello'],
+  'Restaurante Gandhi': [ 'Cordero con coco', 'Tikka Masala' ],
 };
 
 module.exports = { RESTAURANTS, FOODS };

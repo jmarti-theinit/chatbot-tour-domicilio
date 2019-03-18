@@ -1,4 +1,4 @@
-const { listString } = require('./lib/strings');
+const { listString, baseChars } = require('./lib/strings');
 const { FOODS, RESTAURANTS } = require('./data/db');
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
@@ -12,13 +12,13 @@ exports.aDomicilio = functions.https.onRequest((request, response) => {
 
   const listRestaurantes = (agent) => {
     agent.add(`Estos son los restaurantes que tengo de tipo ${agent.parameters.tipoComida}: `);
-    agent.add(listString(RESTAURANTS[agent.parameters.tipoComida]));
+    agent.add(listString(RESTAURANTS[baseChars(agent.parameters.tipoComida)]));
   };
 
   const listMenu = (agent) => {
     agent.setContext({ name: 'comprar', lifespan: 3, parameters: { lugar: agent.parameters.lugar }});
     agent.add(`Esto es lo que puedes comprar en el lugar ${agent.parameters.lugar}: `);
-    agent.add(listString(FOODS[agent.parameters.lugar]));
+    agent.add(listString(FOODS[baseChars(agent.parameters.lugar)]));
 
   };
 
