@@ -39,7 +39,6 @@ exports.aDomicilio = functions.https.onRequest((request, response) => {
     }
   };
 
-  console.log('go!');
   let intentMap = new Map();
   intentMap.set('listar-restaurantes-por-tipo-comida', listRestaurantes);
   intentMap.set('listar-menu', listMenu);
