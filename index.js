@@ -1,4 +1,5 @@
 const { listString, baseChars } = require('./lib/strings');
+const validRestaurant = require('./lib/validator');
 const { FOODS, RESTAURANTS } = require('./data/db');
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
@@ -16,10 +17,14 @@ exports.aDomicilio = functions.https.onRequest((request, response) => {
   };
 
   const listMenu = (agent) => {
-    agent.setContext({ name: 'comprar', lifespan: 3, parameters: { lugar: agent.parameters.lugar }});
-    agent.add(`Esto es lo que puedes comprar en el lugar ${agent.parameters.lugar}: `);
-    agent.add(listString(FOODS[baseChars(agent.parameters.lugar)]));
-
+    if (validRestaurant(agent.parameters.lugar)) {
+      agent.setContext({ name: 'comprar', lifespan: 3, parameters: { lugar: agent.parameters.lugar }});
+      agent.add(`Esto es lo que puedes comprar en el lugar ${agent.parameters.lugar}: `);
+      agent.add(listString(FOODS[baseChars(agent.parameters.lugar)]));
+    } else {
+      agent.add(`No he localizado el lugar ${agent.parameters.lugar}.`);
+      agent.add('Pide algo por tipo de comida si quieres saber qué restaurantes hay');
+    }
   };
 
   const escogerComida = (agent) => {
