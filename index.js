@@ -1,5 +1,5 @@
 import { listString } from './lib/strings';
-import { FOODS } from './data/db';
+import { FOODS, RESTAURANTS } from './data/db';
 
 const functions = require('firebase-functions');
 const {WebhookClient} = require('dialogflow-fulfillment');
