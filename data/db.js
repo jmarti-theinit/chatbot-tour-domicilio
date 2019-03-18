@@ -10,4 +10,4 @@ const FOODS = {
   'Pizzeria Donatello': [ 'Pizza margarita', 'Pizza Especialidad Donatello'],
 };
 
-export { RESTAURANTS, FOODS };
+module.exports = { RESTAURANTS, FOODS };
