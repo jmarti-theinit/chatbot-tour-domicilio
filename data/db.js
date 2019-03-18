@@ -5,11 +5,11 @@ const RESTAURANTS = {
 };
 
 const FOODS = {
-  'Restaurante Juan': [ 'Filete con patatas', 'Sopa de cocido', 'Macarrones'],
-  'Restaurante Pepe': [ 'Hamburguesa', 'Costillas de cerdo'],
-  'Pizzeria Lucio': [ 'Pizza margarita', 'Pizza Especialidad Lucio'],
-  'Pizzeria Donatello': [ 'Pizza margarita', 'Pizza Especialidad Donatello'],
-  'Restaurante Gandhi': [ 'Cordero con coco', 'Tikka Masala' ],
+  'restaurante juan': [ 'Filete con patatas', 'Sopa de cocido', 'Macarrones'],
+  'restaurante pepe': [ 'Hamburguesa', 'Costillas de cerdo'],
+  'pizzeria lucio': [ 'Pizza margarita', 'Pizza Especialidad Lucio'],
+  'pizzeria donatello': [ 'Pizza margarita', 'Pizza Especialidad Donatello'],
+  'restaurante gandhi': [ 'Cordero con coco', 'Tikka Masala' ],
 };
 
 module.exports = { RESTAURANTS, FOODS };
