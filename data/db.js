@@ -1,15 +1,18 @@
-const RESTAURANTS = {
-  'americana': [ 'Restaurante Juan', 'Restaurante Pepe' ],
-  'pizzeria': [ 'Pizzeria Lucio', 'Pizzería Donatello'],
-  'hindu': [ 'Restaurante Gandhi' ]
-};
+const { FOODS_BY_RESTAURANT, RESTAURANTS_BY_TYPE_FOOD } = require('./db-data.js');
 
-const FOODS = {
-  'restaurante juan': [ 'Filete con patatas', 'Sopa de cocido', 'Macarrones'],
-  'restaurante pepe': [ 'Hamburguesa', 'Costillas de cerdo'],
-  'pizzeria lucio': [ 'Pizza margarita', 'Pizza Especialidad Lucio'],
-  'pizzeria donatello': [ 'Pizza margarita', 'Pizza Especialidad Donatello'],
-  'restaurante gandhi': [ 'Cordero con coco', 'Tikka Masala' ],
-};
+const baseChars = str => str.toLowerCase().replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
+  .replace(/[èéèÈÉÊË]/g, 'e')
+  .replace(/[íìIÎ]/g, 'i')
+  .replace(/[óòÓÔ]/g, 'o')
+  .replace(/[úùüÙ]/g, 'u')
+  .replace(/[çÇ]/g, 'c')
+  .replace(/[ñÑ]/g, 'n')
+  .replace(/[-\\?]/g, '');
 
-module.exports = { RESTAURANTS, FOODS };
+const findRestaurantesByType = (food) => RESTAURANTS_BY_TYPE_FOOD[baseChars(food)];
+const findMenuByRestaurante = (rest) => FOODS_BY_RESTAURANT[baseChars(rest)];
+const existsRestaurante = (rest) => FOODS_BY_RESTAURANT[baseChars(rest)];
+const existsFood = (food, lugar) => FOODS_BY_RESTAURANT[baseChars(lugar)]
+  .find(f => baseChars(food) === baseChars(f));
+
+module.exports = { findRestaurantesByType, findMenuByRestaurante, existsRestaurante, existsFood };
